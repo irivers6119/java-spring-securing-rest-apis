@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @RestController
 public class ResolutionController {
-	UserService users;
+	private final UserService users;
 	private final ResolutionRepository resolutions;
 
 	public ResolutionController(ResolutionRepository resolutions, UserService users) {
@@ -32,9 +32,9 @@ public class ResolutionController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("user:read"))){
 			for (Resolution resolution : resolutions){
-				String fullName = this.users.getFullName(resolution.getOwner())
+				String name = this.users.getFullName(resolution.getOwner())
 						.orElse("Anonymous");
-				resolution.setText(resolution.getText() + ", by " + fullName);
+				resolution.setText(resolution.getText() + ", by " + name);
 			}
 		}
 		return  resolutions;

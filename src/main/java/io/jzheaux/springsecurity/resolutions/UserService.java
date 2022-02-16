@@ -12,11 +12,11 @@ public class UserService {
 		this.web = web.build();
 	}
 	public Optional<String> getFullName(String username) {
-		String fullName= this.web.get()
+		String name= this.web.get()
 				.uri("/user/{username}/fullName",username)
 				.retrieve()
 				.bodyToMono(String.class)
 				.block();
-		return Optional.ofNullable(fullName);
+		return Optional.ofNullable(name);
 	}
 }

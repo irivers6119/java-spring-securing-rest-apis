@@ -73,6 +73,8 @@ public class ResolutionsApplication extends WebSecurityConfigurerAdapter {
 	return new UserRepositoryOpaqueTokenIntrospector(users, introspector);
 	}
 
+
+
 	@Bean
 	public WebClient.Builder web() {
 		return WebClient.builder()
