@@ -29,16 +29,18 @@ public class ResolutionInitializer implements SmartInitializingSingleton {
 		user.setFullName("User user");
 		this.users.save(user);
 
-		User hasread = new User("hasread", "{bcrypt}$2a$10$TvWbsgPItnpVnUJ9y9WEmeWz.DXNMlacqPuJHytiW.ZHHN74dc.he");
-		hasread.grantAuthority("resolution:read");
-		hasread.grantAuthority("user:read");
-		hasread.setFullName("Has Read");
-		this.users.save(hasread);
+		User hasRead = new User("hasread", "{bcrypt}$2a$10$TvWbsgPItnpVnUJ9y9WEmeWz.DXNMlacqPuJHytiW.ZHHN74dc.he");
+		hasRead.grantAuthority("resolution:read");
+		hasRead.grantAuthority("user:read");
+		hasRead.setFullName("Has Read");
+		this.users.save(hasRead);
 
-		User haswrite = new User("haswrite", "{bcrypt}$2a$10$TvWbsgPItnpVnUJ9y9WEmeWz.DXNMlacqPuJHytiW.ZHHN74dc.he");
-		haswrite.grantAuthority("resolution:write");
-		haswrite.setFullName("Has Write");
-		this.users.save(haswrite);
+		User hasWrite = new User("haswrite", "{bcrypt}$2a$10$TvWbsgPItnpVnUJ9y9WEmeWz.DXNMlacqPuJHytiW.ZHHN74dc.he");
+		hasWrite.grantAuthority("resolution:write");
+		hasWrite.setSubscription("premium");
+		hasWrite.addFriend(hasRead);
+		hasWrite.setFullName("Has Write");
+		this.users.save(hasWrite);
 
 		User admin = new User("admin","{bcrypt}$2a$10$TvWbsgPItnpVnUJ9y9WEmeWz.DXNMlacqPuJHytiW.ZHHN74dc.he");
 		admin.grantAuthority("ROLE_ADMIN");

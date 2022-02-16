@@ -14,6 +14,28 @@ public class User implements Serializable {
     @Id
     UUID id;
 
+    public String getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(String subscription) {
+        this.subscription = subscription;
+    }
+
+    @Column
+    String subscription;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    Collection<User> friends = new ArrayList<>();
+
+    public Collection<User> getFriends(){
+        return  friends;
+    }
+
+    public void addFriend(User user){
+        friends.add(user);
+    }
+
     public String getFullName() {
         return fullName;
     }
@@ -91,6 +113,8 @@ public class User implements Serializable {
         this.fullName = user.fullName;
         this.password = user.password;
         this.enabled = user.enabled;
+        this.subscription = user.subscription;
+        this.friends = user.friends;
         this.userAuthorities = user.userAuthorities;
     }
 }
