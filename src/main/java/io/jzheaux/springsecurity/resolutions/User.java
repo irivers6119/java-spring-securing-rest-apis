@@ -9,8 +9,32 @@ import java.util.UUID;
 
 @Entity(name="users")
 public class User implements Serializable {
+    @OneToMany(fetch= FetchType.EAGER, cascade =CascadeType.ALL)
+    Collection<UserAuthority> userAuthorities = new ArrayList<>();
     @Id
     UUID id;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    @Column(name="full_name")
+    String fullName;
+
+    @Column
+    String username;
+
+    @Column
+    String password;
+
+    @Column
+    boolean enabled= true;
+
+
 
     public UUID getId() {
         return id;
@@ -44,32 +68,29 @@ public class User implements Serializable {
         this.enabled = enabled;
     }
 
-    @Column
-    String username;
-
-    @Column
-    String password;
-
-    @Column
-    boolean enabled= true;
-
     public Collection<UserAuthority> getUserAuthorities() {
-        return Collections.unmodifiableCollection(this.userAuthorities);
+        return userAuthorities;
     }
 
     public void grantAuthority(String authority){
-        UserAuthority userAuthority = new UserAuthority(this, authority);
-        this.userAuthorities.add(userAuthority);
+        this.userAuthorities.add(new UserAuthority(this, authority));
     }
 
-    @OneToMany(fetch= FetchType.EAGER, cascade =CascadeType.ALL)
-    Collection<UserAuthority> userAuthorities = new ArrayList<>();
 
-    User() {}
+    public User() {}
 
     public User(String username, String password) {
         this.id = UUID.randomUUID();
         this.username = username;
         this.password = password;
+    }
+
+    public User(User user) {
+        this.id = user.id;
+        this.username = user.username;
+        this.fullName = user.fullName;
+        this.password = user.password;
+        this.enabled = user.enabled;
+        this.userAuthorities = user.userAuthorities;
     }
 }

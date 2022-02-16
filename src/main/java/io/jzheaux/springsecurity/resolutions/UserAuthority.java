@@ -5,6 +5,15 @@ import java.util.UUID;
 
 @Entity(name="authorities")
 public class UserAuthority {
+    @JoinColumn(name="username", referencedColumnName = "username")
+    @ManyToOne
+    User user;
+    @Id
+     UUID id;
+    @Column
+    String authority;
+
+
     public UUID getId() {
         return id;
     }
@@ -21,16 +30,18 @@ public class UserAuthority {
         this.authority = authority;
     }
 
-    @Id
-    UUID id;
-    @Column
-    String authority;
 
 
-    @JoinColumn(name="username", referencedColumnName = "username")
-    @ManyToOne
-    User user;
-   UserAuthority() {}
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
+    public UserAuthority() {}
     public UserAuthority(User user, String authority) {
        this.id = UUID.randomUUID();
        this.user = user;

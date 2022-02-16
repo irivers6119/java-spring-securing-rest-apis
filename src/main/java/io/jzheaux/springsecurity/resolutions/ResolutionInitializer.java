@@ -20,22 +20,28 @@ public class ResolutionInitializer implements SmartInitializingSingleton {
 		this.resolutions.save(new Resolution("Read War and Peace", "user"));
 		this.resolutions.save(new Resolution("Free Solo the Eiffel Tower", "user"));
 		this.resolutions.save(new Resolution("Hang Christmas Lights", "user"));
+		this.resolutions.save(new Resolution("Get AWS certification", "hasread"));
+		this.resolutions.save(new Resolution("Visit Grandma", "haswrite"));
+
 		User user = new User("user", "{bcrypt}$2a$10$TvWbsgPItnpVnUJ9y9WEmeWz.DXNMlacqPuJHytiW.ZHHN74dc.he");
 		user.grantAuthority("resolution:read");
-		user.grantAuthority("resolution:write");
+		user.grantAuthority("user:read");
+		user.setFullName("User user");
 		this.users.save(user);
 
-
-		User hasread = new User();
-		hasread.setUsername("hasread");
-		hasread.setPassword("{bcrypt}$2a$10$TvWbsgPItnpVnUJ9y9WEmeWz.DXNMlacqPuJHytiW.ZHHN74dc.he");
+		User hasread = new User("hasread", "{bcrypt}$2a$10$TvWbsgPItnpVnUJ9y9WEmeWz.DXNMlacqPuJHytiW.ZHHN74dc.he");
 		hasread.grantAuthority("resolution:read");
+		hasread.setFullName("Has Read");
 		this.users.save(hasread);
 
-		User haswrite = new User();
-		haswrite.setUsername("haswrite");
-		haswrite.setPassword("{bcrypt}$2a$10$TvWbsgPItnpVnUJ9y9WEmeWz.DXNMlacqPuJHytiW.ZHHN74dc.he");
+		User haswrite = new User("haswrite", "{bcrypt}$2a$10$TvWbsgPItnpVnUJ9y9WEmeWz.DXNMlacqPuJHytiW.ZHHN74dc.he");
 		haswrite.grantAuthority("resolution:write");
+		haswrite.setFullName("Has Write");
 		this.users.save(haswrite);
+
+		User admin = new User("admin","{bcrypt}$2a$10$TvWbsgPItnpVnUJ9y9WEmeWz.DXNMlacqPuJHytiW.ZHHN74dc.he");
+		admin.grantAuthority("ROLE_ADMIN");
+		admin.setFullName("Admin Adminson");
+		this.users.save(admin);
 	}
 }
