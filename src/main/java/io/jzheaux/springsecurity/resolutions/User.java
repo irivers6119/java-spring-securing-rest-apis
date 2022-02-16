@@ -22,7 +22,7 @@ public class User implements Serializable {
         this.subscription = subscription;
     }
 
-    @Column
+    @Column(name="subscription")
     String subscription;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -32,8 +32,8 @@ public class User implements Serializable {
         return  friends;
     }
 
-    public void addFriend(User user){
-        friends.add(user);
+    public void addFriend(User friend){
+        friends.add(friend);
     }
 
     public String getFullName() {

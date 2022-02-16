@@ -49,8 +49,7 @@ public class ResolutionController {
 
 	@PostMapping("/resolution")
 	@PreAuthorize("hasAuthority('resolution:write')")
-	public Resolution make(@RequestBody String text) {
-		String owner = "user";
+	public Resolution make(@CurrentUsername String owner, @RequestBody String text) {
 		Resolution resolution = new Resolution(text, owner);
 		return this.resolutions.save(resolution);
 	}
@@ -84,7 +83,7 @@ public class ResolutionController {
 				.filter(r -> r.getOwner().equals(user.getUsername()))
 				.map(Resolution::getText).ifPresent(text -> {
 					for (User friend : user.getFriends()) {
-						make(friend.getUsername());
+						make(friend.getUsername(), text);
 					}
 		});
 		return resolution;
