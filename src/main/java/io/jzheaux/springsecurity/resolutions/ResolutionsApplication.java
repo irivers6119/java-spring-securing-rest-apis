@@ -59,14 +59,6 @@ public class ResolutionsApplication extends WebSecurityConfigurerAdapter {
 		};
 	}
 
-	/*@Bean
-	JwtAuthenticationConverter jwtAuthenticationConverter(){
-		JwtAuthenticationConverter authenticationConverter = new JwtAuthenticationConverter();
-		JwtGrantedAuthoritiesConverter authoritiesConverter = new JwtGrantedAuthoritiesConverter();
-		authoritiesConverter.setAuthorityPrefix("");
-		authenticationConverter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
-		return authenticationConverter;
-	}*/
 
 	public static void main(String[] args) {
 	SpringApplication.run(ResolutionsApplication.class, args);
